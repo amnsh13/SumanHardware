@@ -1,0 +1,1936 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Suman Hardware – Quality Sanitaryware & Plumbing</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --green: #2d6a4f;
+      --green-dark: #1b4332;
+      --green-mid: #40916c;
+      --green-light: #b7e4c7;
+      --green-pale: #d8f3dc;
+      --white: #ffffff;
+      --off-white: #f8faf8;
+      --text: #1a2e1e;
+      --text-muted: #4a6350;
+      --border: #c3dfc9;
+      --serif: 'Playfair Display', Georgia, serif;
+      --sans: 'DM Sans', sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--sans);
+      color: var(--text);
+      background: var(--white);
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 6vw;
+      height: 72px;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      transition: box-shadow .3s;
+    }
+
+    nav.scrolled {
+      box-shadow: 0 4px 24px rgba(45, 106, 79, .12);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .nav-logo-icon {
+      width: 36px;
+      height: 36px;
+      background: var(--green);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .nav-logo-icon img {
+      width: 28px;
+      height: 28px;
+      object-fit: contain;
+    }
+
+    .nav-logo-text {
+      font-family: var(--serif);
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--green-dark);
+      letter-spacing: -.3px;
+    }
+
+    .nav-logo-sub {
+      font-size: 10px;
+      color: var(--text-muted);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      font-weight: 400;
+      margin-top: -2px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-muted);
+      letter-spacing: .3px;
+      position: relative;
+      padding-bottom: 2px;
+      transition: color .2s;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 1.5px;
+      background: var(--green);
+      transition: width .25s;
+    }
+
+    .nav-links a:hover {
+      color: var(--green);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .nav-cta {
+      background: var(--green);
+      color: white !important;
+      padding: 8px 20px;
+      border-radius: 50px;
+      font-size: 13px !important;
+      transition: background .2s !important;
+    }
+
+    .nav-cta::after {
+      display: none !important;
+    }
+
+    .nav-cta:hover {
+      background: var(--green-dark) !important;
+    }
+
+    /* ── HAMBURGER ── */
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 6px;
+    }
+
+    .nav-hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--green-dark);
+      border-radius: 2px;
+      transition: all .3s;
+    }
+
+    .nav-hamburger.open span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+
+    .nav-hamburger.open span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .nav-hamburger.open span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 72px;
+      left: 0;
+      right: 0;
+      background: rgba(255, 255, 255, 0.97);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      flex-direction: column;
+      gap: 0;
+      z-index: 99;
+      box-shadow: 0 8px 32px rgba(45, 106, 79, .12);
+    }
+
+    .mobile-menu.open {
+      display: flex;
+    }
+
+    .mobile-menu a {
+      text-decoration: none;
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--text);
+      padding: 18px 6vw;
+      border-bottom: 1px solid var(--border);
+      transition: color .2s, background .2s;
+    }
+
+    .mobile-menu a:hover {
+      color: var(--green);
+      background: var(--green-pale);
+    }
+
+    .mobile-menu a.nav-cta-mobile {
+      background: var(--green);
+      color: white;
+      margin: 16px 6vw 20px;
+      border-radius: 50px;
+      text-align: center;
+      border: none;
+    }
+
+    .mobile-menu a.nav-cta-mobile:hover {
+      background: var(--green-dark);
+    }
+
+    /* ── HERO ── */
+    #hero {
+      height: 100vh;
+      min-height: 600px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+    /*  background: linear-gradient(145deg, #1b4332 0%, #2d6a4f 45%, #40916c 100%);*/
+      /* 1. Add the path to your JPEG here */
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('hero.jpg');
+
+  /* 2. Make sure the image covers the whole area cleanly */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  /* Optional: Keep a dark background color as a fallback while the image loads */
+  background-color: #1b4332;
+    }
+
+    .hero-pattern {
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle, rgba(183, 228, 199, .15) 1px, transparent 1px);
+      background-size: 32px 32px;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 0 6vw;
+      max-width: 800px;
+      animation: heroIn 1.1s cubic-bezier(.22, 1, .36, 1) both;
+    }
+
+    @keyframes heroIn {
+      from {
+        opacity: 0;
+        transform: translateY(32px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: rgba(183, 228, 199, .25);
+      border: 1px solid rgba(183, 228, 199, .5);
+      color: var(--green-light);
+      font-size: 11px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      border-radius: 50px;
+      margin-bottom: 24px;
+      font-weight: 500;
+      backdrop-filter: blur(6px);
+    }
+
+    .hero-title {
+      font-family: var(--serif);
+      font-size: clamp(36px, 6vw, 68px);
+      color: white;
+      line-height: 1.1;
+      font-weight: 700;
+      margin-bottom: 24px;
+      text-shadow: 0 2px 20px rgba(0, 0, 0, .2);
+    }
+
+    .hero-title em {
+      color: var(--green-light);
+      font-style: normal;
+    }
+
+    .hero-body {
+      font-size: clamp(15px, 1.8vw, 18px);
+      color: rgba(255, 255, 255, .87);
+      line-height: 1.75;
+      margin-bottom: 36px;
+      font-weight: 300;
+      max-width: 620px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero-btns {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: white;
+      color: var(--green-dark);
+      padding: 14px 32px;
+      border-radius: 50px;
+      font-size: 15px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: transform .2s, box-shadow .2s;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, .15);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(0, 0, 0, .2);
+    }
+
+    .btn-outline {
+      border: 1.5px solid rgba(255, 255, 255, .6);
+      color: white;
+      padding: 13px 30px;
+      border-radius: 50px;
+      font-size: 15px;
+      font-weight: 400;
+      text-decoration: none;
+      transition: background .2s, border-color .2s;
+      backdrop-filter: blur(6px);
+    }
+
+    .btn-outline:hover {
+      background: rgba(255, 255, 255, .15);
+      border-color: white;
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      color: rgba(255, 255, 255, .6);
+      font-size: 11px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+
+      0%,
+      100% {
+        transform: translateX(-50%) translateY(0)
+      }
+
+      50% {
+        transform: translateX(-50%) translateY(6px)
+      }
+    }
+
+    .hero-scroll-line {
+      width: 1px;
+      height: 36px;
+      background: linear-gradient(to bottom, rgba(255, 255, 255, .6), transparent);
+    }
+
+    /* ── SECTIONS ── */
+    section {
+      padding: 96px 6vw;
+    }
+
+    .section-label {
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--green-mid);
+      font-weight: 500;
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-family: var(--serif);
+      font-size: clamp(28px, 4vw, 44px);
+      color: var(--green-dark);
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    /*.section-body {
+      font-size: 16px;
+      color: var(--text-muted);
+      line-height: 1.8;
+      margin-top: 16px;
+      max-width: 560px;
+    }
+    */
+
+    /* ── ABOUT STRIP ── */
+   /* #about {
+      background: var(--green-dark);
+      padding: 48px 6vw;
+    }
+
+    .about-inner {
+      display: flex;
+      gap: 48px;
+      align-items: center;
+      justify-content: flex-start;
+      flex-wrap: wrap;
+      margin-top: 56px;
+    }
+
+    .about-stat {
+      text-align: left;
+    }
+
+    .about-stat-num {
+      font-family: var(--serif);
+      font-size: 42px;
+      color: var(--green-light);
+      font-weight: 700;
+    }
+
+    .about-stat-label {
+      font-size: 13px;
+      color: rgba(255, 255, 255, .65);
+      margin-top: 4px;
+      letter-spacing: .5px;
+    }
+
+    .about-divider {
+      width: 1px;
+      height: 60px;
+      background: rgba(255, 255, 255, .15);
+    }
+    */
+
+    /* ── PRODUCTS ── */
+    #products {
+      background: var(--off-white);
+    }
+
+    .products-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 48px;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .product-card {
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      transition: transform .25s, box-shadow .25s;
+      cursor: default;
+    }
+
+    .product-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 16px 40px rgba(45, 106, 79, .12);
+    }
+
+    .product-icon {
+      background: var(--off-white);
+      height: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .product-icon svg {
+      width: 48px;
+      height: 48px;
+      fill: var(--green);
+      opacity: .85;
+    }
+
+    .product-img {
+      width: 100%;
+      height: 100%;
+      /* 'contain' shows the whole product without cropping */
+      /* Use 'cover' if you want the image to fill the entire 120px area */
+      object-fit: contain;
+      padding: 15px;
+      /* Adds some breathing room so the product isn't touching the edges */
+      transition: transform 0.3s ease;
+    }
+
+    /* Optional: slight zoom effect on the image when hovering the card */
+    .product-card:hover .product-img {
+      transform: scale(1.05);
+    }
+
+    .product-info {
+      padding: 18px 20px;
+    }
+
+    .product-name {
+      font-family: var(--serif);
+      font-size: 17px;
+      color: var(--green-dark);
+      font-weight: 600;
+    }
+
+    .product-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 6px;
+      line-height: 1.6;
+    }
+
+    .product-tag {
+      display: inline-block;
+      margin-top: 12px;
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      background: var(--green-pale);
+      color: var(--green-mid);
+      padding: 4px 10px;
+      border-radius: 50px;
+      font-weight: 500;
+    }
+
+    /* ── GALLERY ── */
+    #gallery {
+      background: white;
+    }
+
+    .gallery-header {
+      margin-bottom: 48px;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    @media(max-width: 640px) {
+      .gallery-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .gallery-item {
+      border-radius: 16px;
+      overflow: hidden;
+      background: #f5f8f5;
+      border: 1px solid var(--border);
+      position: relative;
+      aspect-ratio: 4/3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform .25s, box-shadow .25s;
+    }
+
+    .gallery-item:hover {
+      transform: scale(1.02);
+      box-shadow: 0 16px 40px rgba(45, 106, 79, .15);
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .gallery-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(transparent, rgba(27, 67, 50, .75));
+      color: white;
+      font-size: 13px;
+      font-weight: 500;
+      padding: 24px 16px 14px;
+      transform: translateY(100%);
+      transition: transform .25s;
+    }
+
+    .gallery-item:hover .gallery-caption {
+      transform: translateY(0);
+    }
+
+    /* ── WHY US ── */
+
+    /* ── WHY US SPLIT LAYOUT ── */
+    #why {
+      background: var(--green-dark);
+      padding: 96px 6vw;
+    }
+
+    #why .section-label {
+      color: var(--green-light);
+    }
+
+    #why .section-title {
+      color: white;
+      margin: 0; /* Keeps it flush in the flex container */
+    }
+
+    /* The Main Flex Container */
+    .why-split {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 5vw;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* Left Side: Headings */
+    .why-left {
+      flex: 1;
+      max-width: 450px;
+    }
+
+    /* Middle: Vertical Bar */
+    .why-divider {
+      width: 2px;
+      background: rgba(255, 255, 255, 0.15);
+      align-self: stretch; /* Makes the bar stretch to the height of the content */
+      min-height: 160px;
+      border-radius: 2px;
+    }
+
+    /* Right Side: Stats / Description */
+    .why-right {
+      flex: 1.2;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr); /* Creates a clean 2x2 grid for the 4 stats */
+      gap: 48px 32px; /* Row gap, column gap */
+    }
+
+    .about-stat {
+      text-align: left;
+    }
+
+    .about-stat-num {
+      font-family: var(--serif);
+      font-size: 42px;
+      color: var(--green-light);
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .about-stat-label {
+      font-size: 14px;
+      color: rgba(255, 255, 255, .7);
+      margin-top: 10px;
+      letter-spacing: .5px;
+      line-height: 1.4;
+    }
+
+    /* Mobile Responsiveness (Stacks vertically on small screens) */
+    @media(max-width: 850px) {
+      .why-split {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 40px;
+      }
+      
+      .why-divider {
+        width: 100%;
+        height: 2px;
+        min-height: auto; /* Turns the vertical bar into a horizontal bar on mobile */
+      }
+      
+      .why-right {
+        width: 100%;
+      }
+    }
+    
+    @media(max-width: 480px) {
+      .why-right {
+        grid-template-columns: 1fr; /* Stacks stats to 1 column on very small phones */
+        gap: 32px;
+      }
+    }
+
+    /*#why {
+      background: var(--green-dark);
+      padding: 96px 6vw;
+    }
+
+    #why .section-label {
+      color: var(--green-light);
+    }
+
+    #why .section-title {
+      color: white;
+    }
+
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      margin-top: 56px;
+      align-items: start;
+    }
+
+    @media(max-width: 1024px) {
+      .why-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media(max-width: 540px) {
+      .why-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+      }
+    }
+
+    @media(max-width: 380px) {
+      .why-grid {
+        grid-template-columns: 1fr;
+      }
+    }*/
+
+
+
+    .why-card {
+      background: rgba(255, 255, 255, .05);
+      border: 1px solid rgba(255, 255, 255, .1);
+      border-radius: 24px;
+      padding: 36px 24px 32px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+      transition: background .3s, transform .3s, border-color .3s;
+      /* 9:16 portrait ratio */
+      aspect-ratio: 9 / 16;
+      z-index: 1;
+    }
+
+    /* This puts the image behind the text but in front of the dark background */
+    .why-image-wrapper {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      opacity: 0.4;
+      /* Faded so text remains readable */
+    }
+
+    .why-image-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      /* Keeps the aspect ratio of the photo clean */
+    }
+
+    .why-card:hover {
+      background: rgba(255, 255, 255, .1);
+      transform: translateY(-8px);
+      border-color: rgba(255, 255, 255, .22);
+    }
+
+    /* Large ghost number sits top-right */
+    .why-card-num {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-family: var(--serif);
+      font-size: 80px;
+      font-weight: 700;
+      color: rgba(255, 255, 255, .06);
+      line-height: 1;
+      user-select: none;
+      letter-spacing: -4px;
+    }
+
+    /* Icon at top */
+    .why-icon {
+      width: 54px;
+      height: 54px;
+      background: var(--green-mid);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: auto;
+      flex-shrink: 0;
+      box-shadow: 0 8px 24px rgba(64, 145, 108, .35);
+      /* Added overflow hidden to keep the image within the rounded corners */
+      overflow: hidden;
+    }
+
+    .why-icon svg {
+      width: 26px;
+      height: 26px;
+      fill: white;
+    }
+
+    /* Text pushed to bottom */
+    .why-text-block {
+      margin-top: auto;
+      padding-top: 24px;
+    }
+
+    .why-title {
+      font-family: var(--serif);
+      font-size: 24px;
+      color: white;
+      font-weight: 600;
+      margin-bottom: 12px;
+      line-height: 1.25;
+    }
+
+    .why-body {
+      font-size: 14px;
+      color: rgba(255, 255, 255, .6);
+      line-height: 1.8;
+    }
+
+    /* Accent line at bottom of card */
+    .why-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--green-mid), transparent);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform .4s ease;
+      border-radius: 0 0 24px 24px;
+    }
+
+    .why-card:hover::after {
+      transform: scaleX(1);
+    }
+
+    /* ── BACK TO TOP ── */
+    #back-to-top {
+      position: fixed;
+      bottom: 32px;
+      right: 32px;
+      z-index: 200;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--green);
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 20px rgba(45, 106, 79, .35);
+      opacity: 0;
+      transform: translateY(16px) scale(0.9);
+      transition: opacity .35s cubic-bezier(.22, 1, .36, 1), transform .35s cubic-bezier(.22, 1, .36, 1), background .2s;
+      pointer-events: none;
+    }
+
+    #back-to-top.visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      pointer-events: auto;
+    }
+
+    #back-to-top:hover {
+      background: var(--green-dark);
+    }
+
+    #back-to-top svg {
+      width: 20px;
+      height: 20px;
+      fill: white;
+    }
+
+    /* ── CONTACT ── */
+    #contact {
+      background: var(--off-white);
+    }
+
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: stretch;
+      /* aligh-tems: start; */
+    }
+
+    @media(max-width: 768px) {
+      .contact-layout {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+    }
+
+    .contact-info-item {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      margin-bottom: 28px;
+    }
+
+    .contact-info-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--green-pale);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .contact-info-icon svg {
+      width: 18px;
+      height: 18px;
+      fill: var(--green);
+    }
+
+    .contact-info-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--green-mid);
+      font-weight: 500;
+      margin-bottom: 4px;
+    }
+
+    .contact-info-val {
+      font-size: 15px;
+      color: var(--text);
+      font-weight: 400;
+    }
+
+    .contact-form {
+      background: white;
+      border-radius: 20px;
+      padding: 36px 36px 44px 36px; 
+      border: 1px solid var(--border);
+      height: 100%; /* Forces the form to stretch to the bottom */
+      display: flex;
+      flex-direction: column;
+      position: relative; /* Crucial for making the success message float */
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: .5px;
+      color: var(--text-muted);
+      margin-bottom: 7px;
+      text-transform: uppercase;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      font-family: var(--sans);
+      font-size: 15px;
+      color: var(--text);
+      background: var(--off-white);
+      transition: border-color .2s, box-shadow .2s;
+      outline: none;
+      appearance: none;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      border-color: var(--green);
+      box-shadow: 0 0 0 3px rgba(45, 106, 79, .1);
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    .form-submit {
+      width: 100%;
+      background: var(--green);
+      color: white;
+      border: none;
+      padding: 14px;
+      border-radius: 50px;
+      font-family: var(--sans);
+      font-size: 15px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background .2s, transform .15s;
+      margin-top: auto; /* Pushes the button to the very bottom of the form box */
+    }
+
+    .form-submit:hover {
+      background: var(--green-dark);
+      transform: translateY(-1px);
+    }
+
+    .form-success {
+     /* display: none;
+      text-align: center;
+      padding: 20px;
+      color: var(--green);
+      font-size: 16px;
+      font-weight: 500;*/
+
+      display: none; /* Your JS still turns this on/off */
+      position: absolute;
+      bottom: 0; 
+      left: 0;
+      right: 0;
+      height: 44px; /* Matches the extra padding at the bottom of the form */
+      line-height: 44px; /* Vertically centers the text exactly in the middle of that 44px space */
+      text-align: center;
+      color: var(--green-mid);
+      font-size: 14px;
+      font-weight: 500;
+      margin: 0;
+      padding: 0;
+    }
+
+    .form-note {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 60px;
+      line-height: 60px; /* Centers it perfectly just like the success message */
+      text-align: center;
+      color: var(--text-muted); /* Nice subtle gray text */
+      font-size: 12px; /* Smaller than the success message */
+      margin: 0;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--green-dark);
+      color: rgba(255, 255, 255, .75);
+      padding: 56px 6vw 32px;
+    }
+
+    .footer-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 40px;
+      flex-wrap: wrap;
+      margin-bottom: 40px;
+    }
+
+    .footer-brand {
+      max-width: 280px;
+    }
+
+    .footer-brand .nav-logo-text {
+      color: white;
+      display: block;
+      margin-bottom: 12px;
+    }
+
+    .footer-brand p {
+      font-size: 14px;
+      line-height: 1.8;
+      color: rgba(255, 255, 255, .6);
+    }
+
+    .footer-col h4 {
+      font-family: var(--serif);
+      font-size: 16px;
+      color: white;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+
+    .footer-col ul {
+      list-style: none;
+    }
+
+    .footer-col ul li {
+      margin-bottom: 10px;
+    }
+
+    .footer-col ul li a {
+      text-decoration: none;
+      font-size: 14px;
+      color: rgba(255, 255, 255, .6);
+      transition: color .2s;
+    }
+
+    .footer-col ul li a:hover {
+      color: var(--green-light);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, .1);
+      padding-top: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .footer-bottom p {
+      font-size: 13px;
+      color: rgba(255, 255, 255, .4);
+    }
+
+    /* ── SCROLL ANIMATIONS ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-delay-1 {
+      transition-delay: .1s;
+    }
+
+    .reveal-delay-2 {
+      transition-delay: .2s;
+    }
+
+    .reveal-delay-3 {
+      transition-delay: .3s;
+    }
+
+    .reveal-delay-4 {
+      transition-delay: .4s;
+    }
+
+    @media(max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+
+      .nav-hamburger {
+        display: flex;
+      }
+
+      .about-divider {
+        display: none;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+
+      .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- NAV -->
+  <nav id="navbar">
+    <a href="#hero" class="nav-logo">
+      <div class="nav-logo-icon">
+      <img src="assets\sh_logo1.png" alt="Logo Icon" />
+    </div>
+      <div>
+        <div class="nav-logo-text">Suman Hardware</div>
+        <div class="nav-logo-sub">Sanitaryware & Plumbing</div>
+      </div>
+    </a>
+    <div class="nav-links">
+      <a href="#products">Products</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#why">Why Us</a>
+      <!--<a href="#contact" class="nav-cta">Contact Us</a>-->
+    </div>
+    <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#products" onclick="closeMobile()">Products</a>
+    <a href="#gallery" onclick="closeMobile()">Gallery</a>
+    <a href="#why" onclick="closeMobile()">Why Us</a>
+    <a href="#contact" class="nav-cta-mobile" onclick="closeMobile()">Contact Us</a>
+  </div>
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-pattern"></div>
+  <!--  <svg style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:.18" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="1200" cy="150" r="280" fill="none" stroke="white" stroke-width="1.5" />
+      <circle cx="1200" cy="150" r="180" fill="none" stroke="white" stroke-width="1" />
+      <circle cx="200" cy="700" r="200" fill="none" stroke="white" stroke-width="1.5" />
+      <circle cx="700" cy="500" r="350" fill="none" stroke="white" stroke-width=".8" />
+      <line x1="0" y1="0" x2="1440" y2="900" stroke="white" stroke-width=".5" />
+      <line x1="1440" y1="0" x2="0" y2="900" stroke="white" stroke-width=".5" />
+    </svg> -->
+    <div class="hero-content">
+      <div class="hero-badge">Nepal's Trusted Sanitaryware Store</div>
+      <h1 class="hero-title">Quality Plumbing,<br><em>Built to Last</em></h1>
+      <p class="hero-body">Discover quality sanitaryware and plumbing essentials at Suman Hardware. From basins and mixers to pipes and fittings, we have everything you need to complete your project.</p>
+      <div class="hero-btns">
+        <a href="#products" class="btn-primary">Explore Products</a>
+        <a href="#contact" class="btn-outline">Contact Us</a>
+      </div>
+    </div>
+    <div class="hero-scroll">
+      <div class="hero-scroll-line"></div>
+      <span>Scroll</span>
+    </div>
+  </section>
+  <!-- ABOUT STRIP -->
+<!--  <div id="about">
+    <div class="about-inner">
+      <div class="about-stat reveal">
+        <div class="about-stat-num">500+</div>
+        <div class="about-stat-label">Products in Stock</div>
+      </div>
+      <div class="about-divider"></div>
+      <div class="about-stat reveal reveal-delay-1">
+        <div class="about-stat-num">15+</div>
+        <div class="about-stat-label">Years Experience</div>
+      </div>
+      <div class="about-divider"></div>
+      <div class="about-stat reveal reveal-delay-2">
+        <div class="about-stat-num">Top</div>
+        <div class="about-stat-label">Brands Available</div>
+      </div>
+      <div class="about-divider"></div>
+      <div class="about-stat reveal reveal-delay-3">
+        <div class="about-stat-num">100%</div>
+        <div class="about-stat-label">Genuine Products</div>
+      </div>
+    </div>
+  </div> -->
+  <!-- PRODUCTS -->
+  <section id="products">
+    <div class="products-header">
+      <div>
+        <div class="section-label reveal">Our Products</div>
+        <h2 class="section-title reveal">Everything for your<br>bathroom &amp; plumbing</h2>
+      </div>
+      <p class="section-body reveal" style="max-width: 340px; margin-top: 0;">We carry a comprehensive range of sanitaryware, pipe systems, fittings, and accessories sourced from top-quality manufacturers.</p>
+    </div>
+    <div class="product-grid">
+      <div class="product-card reveal">
+        <div class="product-icon">
+          <img src="assets\commode.png" alt="Commode" class="product-img">
+        </div>
+        <div class="product-info">
+          <div class="product-name">Commode</div>
+          <div class="product-desc">One-piece and two-piece floor-mounted and wall-hung toilets in various designs.</div>
+          <span class="product-tag">Sanitaryware</span>
+        </div>
+      </div>
+      <div class="product-card reveal reveal-delay-1">
+        <div class="product-icon">
+          <img src="assets\basin_ped.png" alt="Basin" class="product-img">
+        </div>
+        <div class="product-info">
+          <div class="product-name">Basin</div>
+          <div class="product-desc">Pedestal, wall-hung, and counter-top ceramic wash basins in all sizes.</div>
+          <span class="product-tag">Sanitaryware</span>
+        </div>
+      </div>
+      <div class="product-card reveal reveal-delay-2">
+        <div class="product-icon">
+          <img src="assets\basin_mixer.png" alt="Basin Mixer" class="product-img">
+        </div>
+        <div class="product-info">
+          <div class="product-name">Basin Mixer</div>
+          <div class="product-desc">Single-lever and two-handle chrome mixer taps for washbasins.</div>
+          <span class="product-tag">Fittings</span>
+        </div>
+      </div>
+      <div class="product-card reveal">
+        <div class="product-icon">
+          <img src="assets\wall_mixer.png" alt="Wall Mixer" class="product-img">
+        </div>
+        <div class="product-info">
+          <div class="product-name">Wall Mixer</div>
+          <div class="product-desc">Hot &amp; cold wall-mounted mixer valves ideal for showers and baths.</div>
+          <span class="product-tag">Fittings</span>
+        </div>
+      </div>
+      <div class="product-card reveal reveal-delay-1">
+        <div class="product-icon">
+          <img src="assets\spray.png" alt="Spray" class="product-img">
+        </div>
+        <div class="product-info">
+          <div class="product-name">Taps &amp; Faucets</div>
+          <div class="product-desc">Pillar taps, sensor taps, bib taps, and kitchen faucets for all needs.</div>
+          <span class="product-tag">Fittings</span>
+        </div>
+      </div>
+      <div class="product-card reveal reveal-delay-2">
+        <div class="product-icon">
+          <img src="assets\pipes_fitting.png" alt="Pipes" class="product-img">
+        </div>
+        <div class="product-info">
+          <div class="product-name">CPVC Pipes & Fittings</div>
+          <div class="product-desc">Durable CPVC and PVC pipes with full range of fittings and joints.</div>
+          <span class="product-tag">Pipes</span>
+        </div>
+      </div>
+
+      <div class="product-card reveal reveal-delay-2">
+        <div class="product-icon">
+          <img src="assets\tank.png" alt="Tank" class="product-img">
+        </div>
+        <div class="product-info">
+          <div class="product-name">Water Tank</div>
+          <div class="product-desc">Plastic, fibreglass, and concrete-compatible water storage tanks.</div>
+          <span class="product-tag">Storage</span>
+        </div>
+      </div>
+      <div class="product-card reveal">
+        <div class="product-icon">
+          <img src="assets\sink.png" alt="Sink" class="product-img">
+        </div>
+        <div class="product-info">
+          <div class="product-name">Sink</div>
+          <div class="product-desc">Stainless steel and granite kitchen sinks, single and double bowl.</div>
+          <span class="product-tag">Kitchen</span>
+        </div>
+      </div>
+      <div class="product-card reveal reveal-delay-1">
+        <div class="product-icon">
+          <img src="assets\pump.png" alt="Pump" class="product-img">
+        </div>
+        <div class="product-info">
+          <div class="product-name">Water Pump</div>
+          <div class="product-desc">Submersible, centrifugal, and booster pumps for all water needs.</div>
+          <span class="product-tag">Equipment</span>
+        </div>
+      </div>
+      <div class="product-card reveal reveal-delay-2">
+        <div class="product-icon">
+          <img src="assets\cp_set.png" alt="CP Set" class="product-img">
+        </div>
+        <div class="product-info">
+          <div class="product-name">Accessories</div>
+          <div class="product-desc">Towel rails, soap dishes, shower heads, flanges, and much more.</div>
+          <span class="product-tag">Accessories</span>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- GALLERY -->
+  <section id="gallery">
+    <div class="gallery-header">
+      <div class="section-label reveal">Gallery</div>
+      <h2 class="section-title reveal">Products up close</h2>
+      <p class="section-body reveal">Browse our selection of premium sanitaryware — designed for elegance, built for durability.</p>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-item reveal">
+        <img src="assets\mixer.jpg" alt="Mixer Faucets">
+        <div class="gallery-caption">Mixer Faucets – Chrome Finish</div>
+      </div>
+      <div class="gallery-item reveal reveal-delay-1">
+        <img src="assets\wall_mixer.jpeg" alt="Wall Mixer">
+        <div class="gallery-caption">Wall Mixer – Premium Series</div>
+      </div>
+      <div class="gallery-item reveal reveal-delay-2">
+        <img src="assets\tiles.jpeg" alt="Tiles">
+        <div class="gallery-caption">Modern Tiles</div>
+      </div>
+      <div class="gallery-item reveal">
+        <img src="assets\geyser.jpeg" alt="Geyser">
+        <div class="gallery-caption">Geysers</div>
+      </div>
+      <div class="gallery-item reveal reveal-delay-1">
+        <img src="assets\motor.jpeg" alt="Water Pump">
+        <div class="gallery-caption">Water Pumps</div>
+      </div>
+      <div class="gallery-item reveal reveal-delay-2">
+        <img src="assets\taps.jpeg" alt="Taps">
+        <div class="gallery-caption">Mixers - Chrome Finish</div>
+      </div>
+    </div>
+  </section>
+  <!-- WHY US -->
+<!--
+<section id="why">
+    <div class="section-label reveal">Why Choose Us</div>
+    <h2 class="section-title reveal">The Suman Hardware<br>difference</h2>
+
+    <div id="about">
+        <div class="about-inner">
+          <div class="about-stat reveal">
+            <div class="about-stat-num">500+</div>
+            <div class="about-stat-label">Products in Stock</div>
+          </div>
+          <div class="about-divider"></div>
+          <div class="about-stat reveal reveal-delay-1">
+            <div class="about-stat-num">15+</div>
+            <div class="about-stat-label">Years Experience</div>
+          </div>
+          <div class="about-divider"></div>
+          <div class="about-stat reveal reveal-delay-2">
+            <div class="about-stat-num">Top</div>
+            <div class="about-stat-label">Brands Available</div>
+          </div>
+          <div class="about-divider"></div>
+          <div class="about-stat reveal reveal-delay-3">
+            <div class="about-stat-num">100%</div>
+            <div class="about-stat-label">Genuine Products</div>
+          </div>
+        </div>
+      </div> -->
+  <!--  <div class="why-grid">
+      <div class="why-card reveal">
+        <div class="why-card-num">01</div>
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24">
+            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z" />
+          </svg>
+        </div>
+        <div class="why-image-wrapper">
+          <img src="img\genuine.png" alt="Genuine Quality">
+        </div>
+        <div class="why-text-block">
+          <div class="why-title">Genuine Quality</div>
+          <div class="why-body">Every product we carry is sourced from certified manufacturers, ensuring long-lasting performance and reliability in your home.</div>
+        </div>
+      </div>
+      <div class="why-card reveal reveal-delay-1">
+        <div class="why-card-num">02</div>
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24">
+            <path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zm0 12.08L4.78 11 12 6.92 19.22 11 12 15.08zM1 19h2v2H1zm4 0h14v2H5z" />
+          </svg>
+        </div>
+        <div class="why-image-wrapper">
+          <img src="img\expert.png" alt="Expert">
+        </div>
+        <div class="why-text-block">
+          <div class="why-title">Expert Guidance</div>
+          <div class="why-body">Our experienced team helps you choose the right products for your specific plumbing and bathroom requirements, every time.</div>
+        </div>
+      </div>
+      <div class="why-card reveal reveal-delay-2">
+        <div class="why-card-num">03</div>
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24">
+            <path d="M4 6h16v2H4zm2 4h12v2H6zm3 4h6v2H9z" />
+          </svg>
+        </div>
+        <div class="why-image-wrapper">
+          <img src="img\products.png" alt="Products">
+        </div>
+        <div class="why-text-block">
+          <div class="why-title">Wide Selection</div>
+          <div class="why-body">500+ products in stock — from commodes to PPR pipes. Find everything for your project under one roof, at competitive prices.</div>
+        </div>
+      </div>
+      <div class="why-card reveal reveal-delay-3">
+        <div class="why-card-num">04</div>
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z" />
+          </svg>
+        </div>
+        <div class="why-image-wrapper">
+          <img src="img\supp.png" alt="Support">
+        </div>
+        <div class="why-text-block">
+          <div class="why-title">After-Sales Support</div>
+          <div class="why-body">We stand by every sale. Get guidance and assistance whenever you need help after your purchase — because our service doesn't stop at the till.</div>
+        </div>
+      </div>
+    </div> 
+  </section> -->
+
+  <!-- WHY US -->
+  <!--<section id="why">
+    <div class="section-label reveal">Why Choose Us</div>
+    <h2 class="section-title reveal">The Suman Hardware<br>difference</h2>-->
+
+    <!-- Stats Row -->
+  <!--  <div class="about-inner">
+      <div class="about-stat reveal">
+        <div class="about-stat-num">500+</div>
+        <div class="about-stat-label">Products in Stock</div>
+      </div>
+      
+      <div class="about-divider"></div>
+      
+      <div class="about-stat reveal reveal-delay-1">
+        <div class="about-stat-num">15+</div>
+        <div class="about-stat-label">Years Experience</div>
+      </div>
+      
+      <div class="about-divider"></div>
+      
+      <div class="about-stat reveal reveal-delay-2">
+        <div class="about-stat-num">Top</div>
+        <div class="about-stat-label">Brands Available</div>
+      </div>
+      
+      <div class="about-divider"></div>
+      
+      <div class="about-stat reveal reveal-delay-3">
+        <div class="about-stat-num">100%</div>
+        <div class="about-stat-label">Genuine Products</div>
+      </div>
+    </div>
+  </section>
+  -->
+  <!-- WHY US SPLIT SECTION -->
+  <section id="why">
+    <div class="why-split">
+      
+      <!-- LEFT SIDE: Title -->
+      <div class="why-left">
+        <div class="section-label reveal">Why Choose Us</div>
+        <h2 class="section-title reveal">The Suman Hardware<br>difference</h2>
+      </div>
+
+      <!-- MIDDLE: Vertical Bar -->
+      <div class="why-divider reveal"></div>
+
+      <!-- RIGHT SIDE: Stats / Description Grid -->
+      <div class="why-right">
+        <div class="about-stat reveal">
+          <div class="about-stat-num">500+</div>
+          <div class="about-stat-label">Products in Stock for<br>all your plumbing needs</div>
+        </div>
+        
+        <div class="about-stat reveal reveal-delay-1">
+          <div class="about-stat-num">15+</div>
+          <div class="about-stat-label">Years of trusted<br>local experience</div>
+        </div>
+        
+        <div class="about-stat reveal reveal-delay-2">
+          <div class="about-stat-num">Top</div>
+          <div class="about-stat-label">Brands available<br>under one roof</div>
+        </div>
+        
+        <div class="about-stat reveal reveal-delay-3">
+          <div class="about-stat-num">100%</div>
+          <div class="about-stat-label">Genuine products<br>guaranteed</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="contact-layout">
+      <div>
+        <div class="section-label reveal">Contact Us</div>
+        <h2 class="section-title reveal">Let's talk plumbing</h2>
+        <p class="section-body reveal">Have a question about a product or need a quote for your project? We'd love to hear from you.</p>
+        <div style="margin-top: 40px;">
+          <div class="contact-info-item reveal">
+            <div class="contact-info-icon">
+              <svg viewBox="0 0 24 24">
+                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+              </svg>
+            </div>
+            <div>
+              <div class="contact-info-label">Location</div>
+              <div class="contact-info-val">Satdobato, Lalitpur</div>
+            </div>
+          </div>
+          <div class="contact-info-item reveal reveal-delay-1">
+            <div class="contact-info-icon">
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C9.61 21 3 14.39 3 6a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1.02l-2.2 2.2z" />
+              </svg>
+            </div>
+            <div>
+              <div class="contact-info-label">Phone</div>
+              <div class="contact-info-val">+977 (982) 353 9931</div>
+              <div class="contact-info-val">+977 (980) 300 5610</div>
+            </div>
+          </div>
+          <div class="contact-info-item reveal reveal-delay-2">
+            <div class="contact-info-icon">
+              <svg viewBox="0 0 24 24">
+                <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z" />
+              </svg>
+            </div>
+            <div>
+              <div class="contact-info-label">Email</div>
+              <div class="contact-info-val">info@sumanhardware.com.np</div>
+            </div>
+          </div>
+          <div class="contact-info-item reveal reveal-delay-3">
+            <div class="contact-info-icon">
+              <svg viewBox="0 0 24 24">
+                <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zm.01 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67V7z" />
+              </svg>
+            </div>
+            <div>
+              <div class="contact-info-label">Hours</div>
+              <div class="contact-info-val">Sun – Fri: 8 AM – 8 PM | Sat: 8 AM – 2 PM </div>
+            </div>
+          </div>
+        </div>
+        <div style="margin-top: 28px; border-radius: 16px; overflow: hidden; border: 1px solid var(--border);">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3533.983418270522!2d85.31918757461067!3d27.655984727756543!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb177c8bc66d99%3A0x1c201e13a139359!2sSuman%20Hardware!5e0!3m2!1sen!2snp!4v1775483969724!5m2!1sen!2snp"
+            width="100%" height="240" style="border:0; display:block;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+      </div>
+
+      <div class="contact-form reveal">
+  <h3 style="font-family: var(--serif); font-size: 22px; color: var(--green-dark); margin-bottom: 24px; font-weight: 600;">Send a message</h3>
+  
+  <form id="contactForm">
+    <!-- Your Web3Forms Access Key -->
+    <input type="hidden" name="access_key" value="eb6ea9cd-c42a-40a4-a308-c8c56667fbb5">
+  
+  <!-- 3. Make the email look like it comes from your website -->
+  <input type="hidden" name="from_name" value="Suman Hardware">
+  
+  <!-- 4. Give the email a professional subject line -->
+  <input type="hidden" name="subject" value="New Customer Inquiry!">
+    
+    <div class="form-row">
+      <div class="form-group">
+        <label>Full Name</label>
+        <input type="text" name="Name" placeholder="Your name" required>
+      </div>
+      <div class="form-group">
+        <label>Phone</label>
+        <input type="tel" name="Phone" placeholder="+977 XXXX XXXX">
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <label>Email</label>
+      <input type="email" name="Email" placeholder="you@example.com" required>
+    </div>
+    
+    <div class="form-group">
+      <label>What are you looking for?</label>
+      <select name="Category">
+        <option value="">Select a product category</option>
+        <option value="Commode">Commode</option>
+        <option value="Basin">Basin</option>
+        <option value="Basin Mixer / Wall Mixer">Basin Mixer / Wall Mixer</option>
+        <option value="Taps & Faucets">Taps & Faucets</option>
+        <option value="Pipes & Fittings">Pipes & Fittings</option>
+        <option value="Tiles">Tiles</option>
+        <option value="Water Tank">Water Tank</option>
+        <option value="Water Pump">Water Pump</option>
+        <option value="Other">Other / Multiple</option>
+      </select>
+    </div>
+    
+    <div class="form-group">
+      <label>Message</label>
+      <textarea name="Message" placeholder="Tell us about your project or ask us anything..." required></textarea>
+    </div>
+    
+    <button type="submit" class="form-submit">Send Message</button>
+  </form>
+
+  <!-- Add the note right here -->
+  <div class="form-note" id="formNote">
+    * We typically reply to all inquiries within a few hours.
+  </div>
+  
+  <!-- Success Message (Hidden by default) -->
+  <div class="form-success" id="formSuccess" style="display: none; margin-top: 15px; color: var(--green-mid); font-weight: 500;">
+    Thank you! We'll get back to you shortly.
+  </div>
+</div>
+      <!--<div class="contact-form reveal">
+        <h3 style="font-family: var(--serif); font-size: 22px; color: var(--green-dark); margin-bottom: 24px; font-weight: 600;">Send a message</h3>
+        <form id="contactForm" onsubmit="handleSubmit(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label>Full Name</label>
+              <input type="text" placeholder="Your name" required>
+            </div>
+            <div class="form-group">
+              <label>Phone</label>
+              <input type="tel" placeholder="+977 XXXX XXXX">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" placeholder="you@example.com">
+          </div>
+          <div class="form-group">
+            <label>What are you looking for?</label>
+            <select>
+              <option value="">Select a product category</option>
+              <option>Commode</option>
+              <option>Basin</option>
+              <option>Basin Mixer / Wall Mixer</option>
+              <option>Taps &amp; Faucets</option>
+              <option>Pipes &amp; Fittings</option>
+              <option>Tiles</option>
+              <option>Water Tank</option>
+              <option>Water Pump</option>
+              <option>Other / Multiple</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Message</label>
+            <textarea placeholder="Tell us about your project or ask us anything..."></textarea>
+          </div>
+          <button type="submit" class="form-submit">Send Message</button>
+        </form>
+        <div class="form-success" id="formSuccess">
+          ✅ Thank you! We'll get back to you shortly.
+        </div>
+      </div> -->
+
+
+    </div>
+  </section>
+  <!-- BACK TO TOP -->
+  <button id="back-to-top" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+    <svg viewBox="0 0 24 24">
+      <path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" />
+    </svg>
+  </button>
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-top">
+      <div class="footer-brand">
+        <span class="nav-logo-text">Suman Hardware</span>
+        <p>Your one-stop shop for quality sanitaryware and plumbing essentials in Nepal. Durable products, expert advice, exceptional service.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Products</h4>
+        <ul>
+          <li><a href="#products">Commode</a></li>
+          <li><a href="#products">Basin</a></li>
+          <li><a href="#products">Mixers &amp; Taps</a></li>
+          <li><a href="#products">Pipes &amp; Fittings</a></li>
+          <li><a href="#products">Tiles</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#hero">Home</a></li>
+          <li><a href="#products">Products</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+          <li><a href="#why">Why Us</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Suman Hardware. All rights reserved.</p>
+      <p>Lalitpur, Nepal</p>
+    </div>
+  </footer>
+<script>
+  /* ── NAV SCROLL ── */
+  const navbar = document.getElementById('navbar');
+  const backToTop = document.getElementById('back-to-top');
+  
+  if (navbar && backToTop) {
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 40);
+      backToTop.classList.toggle('visible', window.scrollY > 400);
+    });
+  }
+
+  /* ── HAMBURGER ── */
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  
+  if (hamburger && mobileMenu) {
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      mobileMenu.classList.toggle('open');
+    });
+  }
+
+  function closeMobile() {
+    if (hamburger && mobileMenu) {
+      hamburger.classList.remove('open');
+      mobileMenu.classList.remove('open');
+    }
+  }
+
+  /* ── SCROLL REVEAL ── */
+  const revealEls = document.querySelectorAll('.reveal');
+  
+  if (revealEls.length > 0) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.12
+    });
+    revealEls.forEach(el => observer.observe(el));
+  }
+
+  /* ── CONTACT FORM (WEB3FORMS) ── */
+  const contactForm = document.getElementById('contactForm');
+  
+  if (contactForm) {
+    const submitBtn = contactForm.querySelector('.form-submit');
+    const successMessage = document.getElementById('formSuccess');
+    const formNote = document.getElementById('formNote'); // Grab the new note
+
+    contactForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const formData = new FormData(contactForm);
+      const originalText = submitBtn.textContent;
+
+      // Show loading state and hide the note
+      submitBtn.textContent = "Sending...";
+      submitBtn.disabled = true;
+      if (formNote) formNote.style.display = 'none';
+
+      try {
+        const response = await fetch("https://api.web3forms.com/submit", {
+          method: "POST",
+          body: formData
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          // Show the green success message
+          successMessage.style.display = 'block';
+          contactForm.reset(); 
+          
+          // After 5 seconds, hide success message and bring the note back
+          setTimeout(() => {
+            successMessage.style.display = 'none';
+            if (formNote) formNote.style.display = 'block';
+          }, 5000);
+        } else {
+          alert("Error: " + data.message);
+          if (formNote) formNote.style.display = 'block'; // Bring note back on error
+        }
+
+      } catch (error) {
+        alert("Something went wrong. Please check your internet connection and try again.");
+        if (formNote) formNote.style.display = 'block'; // Bring note back on error
+      } finally {
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
+      }
+    });
+  }
+</script>
+</body>
+
+</html>
