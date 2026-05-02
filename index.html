@@ -1715,6 +1715,9 @@
   <form id="contactForm">
     <!-- Your Web3Forms Access Key -->
     <input type="hidden" name="access_key" value="eb6ea9cd-c42a-40a4-a308-c8c56667fbb5">
+      
+    <input type="hidden" name="Sender_IP" id="ipField" value="Could not fetch IP">
+
   
   <!-- 3. Make the email look like it comes from your website -->
   <input type="hidden" name="from_name" value="Suman Hardware">
@@ -1729,13 +1732,13 @@
       </div>
       <div class="form-group">
         <label>Phone</label>
-        <input type="tel" name="Phone" placeholder="+977 XXXX XXXX">
+        <input type="tel" name="Phone" id="phoneField" placeholder="+977 XXXX XXXX">
       </div>
     </div>
     
     <div class="form-group">
       <label>Email</label>
-      <input type="email" name="Email" placeholder="you@example.com" required>
+      <input type="email" name="Email" id="emailField" placeholder="you@example.com">
     </div>
     
     <div class="form-group">
@@ -1904,21 +1907,35 @@
     revealEls.forEach(el => observer.observe(el));
   }
 
-  /* ── CONTACT FORM (WEB3FORMS) ── */
+  /* ── CONTACT FORM (WEB3FORMS) + GATEKEEPER ── */
   const contactForm = document.getElementById('contactForm');
   
   if (contactForm) {
     const submitBtn = contactForm.querySelector('.form-submit');
     const successMessage = document.getElementById('formSuccess');
-    const formNote = document.getElementById('formNote'); // Grab the new note
+    const formNote = document.getElementById('formNote'); 
 
     contactForm.addEventListener('submit', async (e) => {
-      e.preventDefault();
+      e.preventDefault(); // Stop default form submission immediately
 
+      // 1. GATEKEEPER: Check Email and Phone first
+      const emailField = document.getElementById('emailField');
+      const phoneField = document.getElementById('phoneField');
+      
+      if (emailField && phoneField) {
+        const emailValue = emailField.value.trim();
+        const phoneValue = phoneField.value.trim();
+
+        if (emailValue === "" && phoneValue === "") {
+          alert("Please provide either an Email Address or a Phone Number so we can reply to you!");
+          return; // This strictly stops the function so the email does NOT send
+        }
+      }
+
+      // 2. If validation passes, proceed with sending the email
       const formData = new FormData(contactForm);
       const originalText = submitBtn.textContent;
 
-      // Show loading state and hide the note
       submitBtn.textContent = "Sending...";
       submitBtn.disabled = true;
       if (formNote) formNote.style.display = 'none';
@@ -1932,30 +1949,41 @@
         const data = await response.json();
 
         if (response.ok) {
-          // Show the green success message
           successMessage.style.display = 'block';
           contactForm.reset(); 
           
-          // After 5 seconds, hide success message and bring the note back
           setTimeout(() => {
             successMessage.style.display = 'none';
             if (formNote) formNote.style.display = 'block';
           }, 5000);
         } else {
           alert("Error: " + data.message);
-          if (formNote) formNote.style.display = 'block'; // Bring note back on error
+          if (formNote) formNote.style.display = 'block'; 
         }
 
       } catch (error) {
         alert("Something went wrong. Please check your internet connection and try again.");
-        if (formNote) formNote.style.display = 'block'; // Bring note back on error
+        if (formNote) formNote.style.display = 'block'; 
       } finally {
         submitBtn.textContent = originalText;
         submitBtn.disabled = false;
       }
     });
   }
+
+  /* ── FETCH SENDER IP ── */
+  fetch('https://api.ipify.org?format=json')
+    .then(response => response.json())
+    .then(data => {
+      const ipField = document.getElementById('ipField');
+      if (ipField) {
+        ipField.value = data.ip;
+      }
+    })
+    .catch(error => console.log('IP fetch blocked or failed:', error));
+
 </script>
+
 </body>
 
 </html>
